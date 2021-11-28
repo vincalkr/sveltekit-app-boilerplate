@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+    }
+
+    .theme-swiss {
+        --color-primary: #395bbd;
+        --color-primary-dark: #14224a;
+    }
+
+    .theme-neon {
+        --color-primary: #20ffad;
+        --color-primary-dark: #0a422e;
+        --color-button-muted: 99, 102, 241;
+    }
+}
+
+@layer components {
+    .btn {
+        @apply bg-indigo-500 mx-5 p-5 rounded-sm 
+        hover:scale-110
+        /* hover:scale-a  */
+        active:scale-75;
+    }
+
+    .square {
+        @apply absolute bg-button-muted bg-opacity-50 dark:bg-primary-dark dark:bg-opacity-50 w-5 h-5 p-5;
+    }
+}
+
+@layer utilities {
+    .p-111 {
+        @apply p-20 m-20 bg-blue-300;
+    }
+
+    @variants hover,
+    focus {
+        .p-111 {
+            @apply p-10 m-10 bg-blue-50;
+        }
+    }
+}
