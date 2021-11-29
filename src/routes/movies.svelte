@@ -28,6 +28,7 @@
 	}
 
 	$: console.log($moviesState.selected);
+	$: console.log(search);
 </script>
 
 <svelte:head>
@@ -77,7 +78,7 @@
 					>
 						<div class="flex items-center border-b border-gray-200 pb-6">
 							<img
-								src={movie.show.image.medium}
+								src={movie.show.image?.medium}
 								alt="coin avatar"
 								class="w-20 h-20 rounded-sm"
 							/>
