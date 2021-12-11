@@ -9,7 +9,7 @@ function withOpacity (variableName) {
 
 module.exports = {
 	mode: 'jit',
-	purge: ['./src/**/*.{html,js,ts,svelte,svx}'],
+	content: ['./src/**/*.{html,js,ts,svelte,svx}'],
 	darkMode: 'class', // or 'media' or 'class'
 	theme: {
 		container: {
@@ -35,12 +35,8 @@ module.exports = {
 			}
 		}
 	},
-	variants: {
-		extend: {}
-	},
 	plugins: [
 		require('@tailwindcss/forms'),
-		require('@tailwindcss/typography'),
-		require('@tailwindcss/aspect-ratio')
+		require('@tailwindcss/typography')
 	]
 };
