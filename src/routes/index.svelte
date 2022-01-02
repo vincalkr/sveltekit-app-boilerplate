@@ -1,14 +1,25 @@
-<script>
+<script lang="ts">
+	import { onMount } from 'svelte';
+	import { blur, fade } from 'svelte/transition';
 	import Rectangle from '$lib/components/Rectangle.svelte';
+
+	let visible = false;
+
+	onMount(() => {
+		visible = true;
+	});
 </script>
 
 <section class="container flex flex-col items-center py-32 mx-auto">
 	<div class="w-full mx-auto text-left md:w-11/12 xl:w-8/12 md:text-center">
-		<h1
-			class="mb-3 text-4xl font-bold text-gray-900 dark:text-gray-400 md:text-5xl md:leading-tight md:font-extrabold"
-		>
-			SvelteKit Boilerplate
-		</h1>
+		{#if visible}
+			<h1
+				class="mb-3 text-4xl font-bold text-gray-900 dark:text-gray-400 md:text-5xl md:leading-tight md:font-extrabold"
+				in:blur={{ duration: 2000 }}
+			>
+				SvelteKit Boilerplate
+			</h1>
+		{/if}
 		<p class="mb-6 text-lg text-gray-500 md:text-xl md:leading-normal">
 			The structure of the project follows the pattern Domain-driven design DDD (features)
 		</p>
