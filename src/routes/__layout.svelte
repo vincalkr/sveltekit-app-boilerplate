@@ -1,7 +1,9 @@
 <script context="module" lang="ts">
-	export const load = async ({ page }) => ({
+	import type { Load } from '@sveltejs/kit';
+
+	export const load: Load = async ({ url: { pathname }, params }) => ({
 	  props: {
-		key: page.path,
+		key: pathname
 	  },
 	})
   </script>
@@ -18,8 +20,12 @@
 
 	export let key: string;
 
+	$: console.log({ ssr: key});
+	$: console.log({ spa: $page.url.pathname});
+
 	const queryClient = new QueryClient();
 </script>
+
 
 <QueryClientProvider client={queryClient}>
 	<PageTransition refresh={key}>
@@ -32,7 +38,7 @@
 				<slot>Empty content</slot>
 			</main>
 			<aside />
-			{#if $page.path != '/'}
+			{#if $page.url.pathname != '/'}
 				<Footer />
 			{/if}
 		</article>

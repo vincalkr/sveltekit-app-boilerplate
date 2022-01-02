@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
-	import type { LoadInput, LoadOutput } from '@sveltejs/kit';
-	export async function load({ page: { host } }: LoadInput): Promise<LoadOutput> {
+	import type { Load } from '@sveltejs/kit';
+	export const load: Load = ({ url: { host } }) => {
 		return {
 			props: {
 				msg: 'Server Side',

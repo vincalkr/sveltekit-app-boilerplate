@@ -2,7 +2,7 @@
 	import type { Load } from '@sveltejs/kit';
 	import type { Post } from '$lib/features/blog/types';
 
-	export const load: Load = async ({ page, fetch }) => {
+	export const load: Load = async ({ url, fetch }) => {
 
 	const allPosts = import.meta.glob('../../lib/features/blog/posts/**/*.svx');
 

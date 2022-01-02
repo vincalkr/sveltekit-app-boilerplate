@@ -12,11 +12,7 @@
 		posts = [...posts, { metadata: module.metadata, path, module: module.default }];
 	}
 
-	export const load: Load = async ({
-		page: {
-			params: { slug }
-		},
-	}) => {
+	export const load: Load = async ({ params: { slug } }) => {
 		const post = posts.find((post) => post.metadata.slug === slug);
 
 		return {
