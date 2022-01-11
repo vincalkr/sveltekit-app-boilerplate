@@ -23,7 +23,7 @@
 						clip-rule="evenodd"
 					/>
 				</svg>
-				Smaller footprint
+				Smaller footprint!
 			</div>
 			<div class="flex items-center">
 				<svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1 text-green-600">

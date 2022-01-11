@@ -38,41 +38,6 @@
 				</a>
 			{/if}
 		{/each}
-		<!-- <a
-				href="#"
-				class="relative inline-flex items-center px-4 py-3 border border-gray-200 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-			>
-				2
-			</a>
-			<a
-				href="#"
-				class="hidden md:inline-flex relative items-center px-4 py-3 border border-gray-200 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-			>
-				3
-			</a>
-			<span
-				class="relative inline-flex items-center px-4 py-3 border border-gray-200 bg-white text-sm font-medium text-gray-700"
-			>
-				...
-			</span>
-			<a
-				href="#"
-				class="hidden md:inline-flex relative items-center px-4 py-3 border border-gray-200 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-			>
-				8
-			</a>
-			<a
-				href="#"
-				class="relative inline-flex items-center px-4 py-3 border border-gray-200 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-			>
-				9
-			</a>
-			<a
-				href="#"
-				class="relative inline-flex items-center px-4 py-3 border border-gray-200 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-			>
-				10
-			</a> -->
 		<a
 			href="#"
 			class="relative inline-flex items-center px-4 py-3 border border-gray-200 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"

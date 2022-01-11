@@ -1,11 +1,11 @@
 <script context="module" lang="ts">
 	export const load = async ({ page }) => ({
-	  props: {
-		key: page.path,
-	  },
-	})
-  </script>
-  
+		props: {
+			key: page.path
+		}
+	});
+</script>
+
 <script lang="ts">
 	import '$lib/styles.css';
 	import '@fortawesome/fontawesome-free/css/all.css';
@@ -32,9 +32,6 @@
 				<slot>Empty content</slot>
 			</main>
 			<aside />
-			{#if $page.path != '/'}
-				<Footer />
-			{/if}
 		</article>
 	</PageTransition>
 </QueryClientProvider>

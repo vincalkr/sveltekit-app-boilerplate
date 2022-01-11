@@ -10,4 +10,3 @@ export const searchMovies = async (name: string) => {
 
 	return data;
 };
-
