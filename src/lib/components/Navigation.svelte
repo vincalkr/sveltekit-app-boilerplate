@@ -1,165 +1,153 @@
-<script lang="ts">
-	let isDark = false;
+<script>
+	import { fade, fly } from 'svelte/transition';
 
-	$: console.log(isDark);
-
-	async function themeToggleHandler() {
-		isDark = document.body.classList.toggle('dark');
+	let shown = false;
+	export function show() {
+		shown = !shown;
 	}
 </script>
 
-<!-- <div class="font-light flex justify-evenly m-2 ml-auto mr-auto p-2 max-w-lg text-xl space-x-2">
-	<nav >
-		<a
-		class="opacity-80 hover:scale-105 hover:animate-pulse hover:opacity-100 p-3 hover:transition-opacity"
-		href="/">Home</a
-	>
-
-		<a
-			class="opacity-80 hover:scale-105 hover:animate-pulse hover:opacity-100 p-3 hover:transition-opacity"
-			href="/exams">Esami</a
-		>
-
-		<a
-			class="opacity-80 hover:scale-105 hover:animate-pulse p-3 hover:opacity-100 hover:transition-opacity"
-			href="#">Strutture</a
-		>
-		<a
-			class="opacity-80 hover:scale-105 hover:animate-pulse p-3 hover:opacity-100 hover:transition-opacity"
-			href="/blog">Blog</a
-		>
-	</nav>
-	<div class="flex items-center space-x-2">
-		<label for="toggle"> DARK </label>
-		<input type="checkbox" on:change={themeToggleHandler} />
-
-	</div>
-</div> -->
-
 <div class="h-full w-full">
 	<!-- Code block starts -->
-	<nav role="navigation" class="bg-white shadow xl:block hidden">
+	<nav role="navigation" class="bg-white shadow inline-block xl:block ">
 		<div class="mx-auto container px-6 py-2 xl:py-0">
 			<div class="flex items-center justify-between">
 				<div class="inset-y-0 left-0 flex items-center xl:hidden">
 					<div
-						class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-100 focus:outline-none transition duration-150 ease-in-out"
+						class="py-4 inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-100 focus:outline-none transition duration-150 ease-in-out"
 					>
-						<div class="visible xl:hidden">
-							<ul
-								class="p-2 border-r bg-white absolute rounded left-0 right-0 shadow mt-8 md:mt-8 hidden"
-							>
-								<li
-									class="flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none"
+						<div id="menu" class="visible xl:hidden">
+							{#if shown}
+								<ul
+									transition:fly={{ x: 200, duration: 200 }}
+									class="py-2 border-r bg-purple-50 absolute rounded left-0 right-0 shadow mt-8 md:mt-8"
 								>
-									<div class="flex items-center">
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											class="icon icon-tabler icon-tabler-grid"
-											width="20"
-											height="20"
-											viewBox="0 0 24 24"
-											stroke-width="1.5"
-											stroke="currentColor"
-											fill="none"
-											stroke-linecap="round"
-											stroke-linejoin="round"
+									<a href="/">
+										<li
+											class=" border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none"
 										>
-											<path stroke="none" d="M0 0h24v24H0z" />
-											<rect x="4" y="4" width="6" height="6" rx="1" />
-											<rect x="14" y="4" width="6" height="6" rx="1" />
-											<rect x="4" y="14" width="6" height="6" rx="1" />
-											<rect x="14" y="14" width="6" height="6" rx="1" />
-										</svg>
-										<span class="ml-2 font-bold">Home</span>
-									</div>
-								</li>
-								<li
-									class="flex xl:hidden flex-col cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none justify-center"
-									onclick="dropdownHandler(this)"
-								>
-									<div class="flex items-center">
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											class="icon icon-tabler icon-tabler-puzzle"
-											width="20"
-											height="20"
-											viewBox="0 0 24 24"
-											stroke-width="1.5"
-											stroke="currentColor"
-											fill="none"
-											stroke-linecap="round"
-											stroke-linejoin="round"
+											<div class="flex items-center">
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													class="icon icon-tabler icon-tabler-grid"
+													width="20"
+													height="20"
+													viewBox="0 0 24 24"
+													stroke-width="1.5"
+													stroke="currentColor"
+													fill="none"
+													stroke-linecap="round"
+													stroke-linejoin="round"
+												>
+													<path stroke="none" d="M0 0h24v24H0z" />
+													<rect x="4" y="4" width="6" height="6" rx="1" />
+													<rect x="14" y="4" width="6" height="6" rx="1" />
+													<rect x="4" y="14" width="6" height="6" rx="1" />
+													<rect x="14" y="14" width="6" height="6" rx="1" />
+												</svg>
+												<span class="ml-2 font-bold">Home</span>
+											</div>
+										</li>
+									</a>
+									<a href="movies">
+										<li
+											class="border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden flex-col cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none justify-center"
+											onclick="dropdownHandler(this)"
 										>
-											<path stroke="none" d="M0 0h24v24H0z" />
-											<path
-												d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1"
-											/>
-										</svg>
-										<span class="ml-2 font-bold">Products</span>
-									</div>
-								</li>
-								<li
-									class="flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 items-center focus:text-indigo-700 focus:outline-none"
-								>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										class="icon icon-tabler icon-tabler-compass"
-										width="20"
-										height="20"
-										viewBox="0 0 24 24"
-										stroke-width="1.5"
-										stroke="currentColor"
-										fill="none"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-									>
-										<path stroke="none" d="M0 0h24v24H0z" />
-										<polyline points="8 16 10 10 16 8 14 14 8 16" />
-										<circle cx="12" cy="12" r="9" />
-									</svg>
-									<span class="ml-2 font-bold">Blog</span>
-								</li>
-								<li
-									class="border-b border-gray-300 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-4 hover:text-indigo-700 items-center focus:text-indigo-700 focus:outline-none"
-								>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										class="icon icon-tabler icon-tabler-code"
-										width="20"
-										height="20"
-										viewBox="0 0 24 24"
-										stroke-width="1.5"
-										stroke="currentColor"
-										fill="none"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-									>
-										<path stroke="none" d="M0 0h24v24H0z" />
-										<polyline points="7 8 3 12 7 16" />
-										<polyline points="17 8 21 12 17 16" />
-										<line x1="14" y1="4" x2="10" y2="20" />
-									</svg>
-									<span class="ml-2 font-bold">Contacts</span>
-								</li>
-								<li
-									class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none"
-								>
-									<div class="flex items-center">
-										<div
-											class="w-12 cursor-pointer flex text-sm border-2 border-transparent rounded focus:outline-none focus:border-white transition duration-150 ease-in-out"
+											<div class="flex items-center">
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													class="icon icon-tabler icon-tabler-puzzle"
+													width="20"
+													height="20"
+													viewBox="0 0 24 24"
+													stroke-width="1.5"
+													stroke="currentColor"
+													fill="none"
+													stroke-linecap="round"
+													stroke-linejoin="round"
+												>
+													<path stroke="none" d="M0 0h24v24H0z" />
+													<path
+														d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1"
+													/>
+												</svg>
+												<span class="ml-2 font-bold">Movies</span>
+											</div>
+										</li>
+									</a>
+									<a href="pokedex">
+										<li
+											class="border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-2 hover:text-indigo-700 items-center focus:text-indigo-700 focus:outline-none"
 										>
-											<img
-												class="rounded h-10 w-10 object-cover"
-												src="https://tuk-cdn.s3.amazonaws.com/assets/components/horizontal_navigation/hn_1.png"
-												alt="logo"
-											/>
-										</div>
-										<p class="text-sm ml-2 cursor-pointer">Jane Doe</p>
-										<div class="sm:ml-2 text-white relative">
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
-												class="icon icon-tabler icon-tabler-chevron-down cursor-pointer"
+												width="16"
+												height="16"
+												fill="currentColor"
+												class="bi bi-dribbble"
+												viewBox="0 0 16 16"
+											>
+												<path
+													fill-rule="evenodd"
+													d="M8 0C3.584 0 0 3.584 0 8s3.584 8 8 8c4.408 0 8-3.584 8-8s-3.592-8-8-8zm5.284 3.688a6.802 6.802 0 0 1 1.545 4.251c-.226-.043-2.482-.503-4.755-.217-.052-.112-.096-.234-.148-.355-.139-.33-.295-.668-.451-.99 2.516-1.023 3.662-2.498 3.81-2.69zM8 1.18c1.735 0 3.323.65 4.53 1.718-.122.174-1.155 1.553-3.584 2.464-1.12-2.056-2.36-3.74-2.551-4A6.95 6.95 0 0 1 8 1.18zm-2.907.642A43.123 43.123 0 0 1 7.627 5.77c-3.193.85-6.013.833-6.317.833a6.865 6.865 0 0 1 3.783-4.78zM1.163 8.01V7.8c.295.01 3.61.053 7.02-.971.199.381.381.772.555 1.162l-.27.078c-3.522 1.137-5.396 4.243-5.553 4.504a6.817 6.817 0 0 1-1.752-4.564zM8 14.837a6.785 6.785 0 0 1-4.19-1.44c.12-.252 1.509-2.924 5.361-4.269.018-.009.026-.009.044-.017a28.246 28.246 0 0 1 1.457 5.18A6.722 6.722 0 0 1 8 14.837zm3.81-1.171c-.07-.417-.435-2.412-1.328-4.868 2.143-.338 4.017.217 4.251.295a6.774 6.774 0 0 1-2.924 4.573z"
+												/>
+											</svg>
+											<span class="ml-2 font-bold">Pokedex</span>
+										</li>
+									</a>
+									<a href="orders">
+										<li
+											class="border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-2 hover:text-indigo-700 items-center focus:text-indigo-700 focus:outline-none"
+										>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												width="24"
+												height="24"
+												viewBox="0 0 24 24"
+												fill="none"
+												stroke="#000000"
+												stroke-width="2"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												><line x1="3" y1="12" x2="21" y2="12" /><line
+													x1="3"
+													y1="6"
+													x2="21"
+													y2="6"
+												/><line x1="3" y1="18" x2="21" y2="18" /></svg
+											>
+											<span class="ml-2 font-bold">Orders</span>
+										</li>
+									</a>
+									<a href="file">
+										<li
+											class="border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-2 hover:text-indigo-700 items-center focus:text-indigo-700 focus:outline-none"
+										>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												width="24"
+												height="24"
+												viewBox="0 0 24 24"
+												fill="none"
+												stroke="#000000"
+												stroke-width="2"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												><path
+													d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"
+												/><path d="M14 3v5h5M16 13H8M16 17H8M10 9H8" /></svg
+											>
+											<span class="ml-2 font-bold">File</span>
+										</li>
+									</a>
+									<a href="blog">
+										<li
+											class="border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-2 hover:text-indigo-700 items-center focus:text-indigo-700 focus:outline-none"
+										>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												class="icon icon-tabler icon-tabler-compass"
 												width="20"
 												height="20"
 												viewBox="0 0 24 24"
@@ -170,76 +158,19 @@
 												stroke-linejoin="round"
 											>
 												<path stroke="none" d="M0 0h24v24H0z" />
-												<polyline points="6 9 12 15 18 9" />
+												<polyline points="8 16 10 10 16 8 14 14 8 16" />
+												<circle cx="12" cy="12" r="9" />
 											</svg>
-										</div>
-									</div>
-								</li>
-								<li
-									class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none"
-								>
-									<div class="flex items-center">
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											class="icon icon-tabler icon-tabler-user"
-											width="20"
-											height="20"
-											viewBox="0 0 24 24"
-											stroke-width="1.5"
-											stroke="currentColor"
-											fill="none"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										>
-											<path stroke="none" d="M0 0h24v24H0z" />
-											<circle cx="12" cy="7" r="4" />
-											<path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-										</svg>
-										<span class="ml-2">Profile</span>
-									</div>
-								</li>
-							</ul>
-							<svg
-								onclick="MenuHandler(this,true)"
-								aria-haspopup="true"
-								aria-label="Main Menu"
-								xmlns="http://www.w3.org/2000/svg"
-								class="show-m-menu icon icon-tabler icon-tabler-menu"
-								width="28"
-								height="28"
-								viewBox="0 0 24 24"
-								stroke-width="1.5"
-								stroke="currentColor"
-								fill="none"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							>
-								<path stroke="none" d="M0 0h24v24H0z" />
-								<line x1="4" y1="8" x2="20" y2="8" />
-								<line x1="4" y1="16" x2="20" y2="16" />
-							</svg>
-						</div>
-						<div class="hidden close-m-menu text-gray-700" onclick="MenuHandler(this,false)">
-							<svg
-								aria-label="Close"
-								xmlns="http://www.w3.org/2000/svg"
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
-								stroke-width="1.5"
-								stroke="currentColor"
-								fill="none"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							>
-								<path stroke="none" d="M0 0h24v24H0z" />
-								<line x1="18" y1="6" x2="6" y2="18" />
-								<line x1="6" y1="6" x2="18" y2="18" />
-							</svg>
+											<span class="ml-2 font-bold">Blog</span>
+										</li>
+									</a>
+								</ul>
+							{/if}
 						</div>
 					</div>
 				</div>
 				<button
+					id="menu-button"
 					class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 rounded-md flex w-full sm:w-auto items-center sm:items-stretch justify-end sm:justify-start"
 				>
 					<div class="flex items-center">
@@ -259,9 +190,11 @@
 								/>
 							</g>
 						</svg>
-						<h2 class="hidden sm:block text-base text-gray-700 font-bold leading-normal px-3">
-							SvelteKit
-						</h2>
+						<button on:click={show}>
+							<h2 class="hidden sm:block text-base text-gray-700 font-bold leading-normal px-3">
+								SvelteKit
+							</h2>
+						</button>
 					</div>
 				</button>
 				<div class="flex">
@@ -460,7 +393,27 @@
 					/>
 				</svg>
 			</div>
-			<h2 class="sm:block text-base text-gray-700 font-bold leading-normal ">SvelteKit</h2>
+			<button on:click={show}>
+				<span>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="#000000"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="6" x2="21" y2="6" /><line
+							x1="3"
+							y1="18"
+							x2="21"
+							y2="18"
+						/></svg
+					>
+				</span>
+			</button>
 		</div>
 	</nav>
 

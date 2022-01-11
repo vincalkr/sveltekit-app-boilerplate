@@ -12,7 +12,7 @@
 	export let order;
 </script>
 
-<div class="mx-auto shadow-lg rounded-2xl w-1/2 p-16 my-12 bg-white dark:bg-gray-800">
+<div class="mx-auto shadow-lg rounded-2xl w-full my-12 bg-white dark:bg-gray-800">
 	<div class="flex flex-row items-start gap-4">
 		<img src={order.image} alt={order.name} class="w-28 h-28 rounded-lg" />
 		<div class="h-28 w-full flex flex-col justify-between">
