@@ -10,7 +10,7 @@
 </script>
 
 {#if $pokeman.isSuccess}
-	<div class="mx-auto shadow-lg rounded-2xl w-1/2 p-16 my-12 bg-white dark:bg-gray-800">
+	<div class="mx-auto shadow-lg rounded-2xl w-full p-4 my-12 bg-white dark:bg-gray-800">
 		<div class="flex flex-row items-start gap-4">
 			<img
 				src={getImageSource($pokeman.data.id)}

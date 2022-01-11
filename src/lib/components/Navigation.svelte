@@ -49,7 +49,7 @@
 											</div>
 										</li>
 									</a>
-									<a href="movies">
+									<a href="/movies">
 										<li
 											class="border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden flex-col cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none justify-center"
 											onclick="dropdownHandler(this)"
@@ -76,7 +76,7 @@
 											</div>
 										</li>
 									</a>
-									<a href="pokedex">
+									<a href="/pokedex">
 										<li
 											class="border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-2 hover:text-indigo-700 items-center focus:text-indigo-700 focus:outline-none"
 										>
@@ -96,7 +96,7 @@
 											<span class="ml-2 font-bold">Pokedex</span>
 										</li>
 									</a>
-									<a href="orders">
+									<a href="/orders">
 										<li
 											class="border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-2 hover:text-indigo-700 items-center focus:text-indigo-700 focus:outline-none"
 										>
@@ -120,7 +120,7 @@
 											<span class="ml-2 font-bold">Orders</span>
 										</li>
 									</a>
-									<a href="file">
+									<a href="/file">
 										<li
 											class="border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-2 hover:text-indigo-700 items-center focus:text-indigo-700 focus:outline-none"
 										>
@@ -141,7 +141,7 @@
 											<span class="ml-2 font-bold">File</span>
 										</li>
 									</a>
-									<a href="blog">
+									<a href="/blog">
 										<li
 											class="border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-2 hover:text-indigo-700 items-center focus:text-indigo-700 focus:outline-none"
 										>
