@@ -2,7 +2,7 @@
 	import Rectangle from '$lib/components/Rectangle.svelte';
 </script>
 
-<section class="container flex flex-col items-center py-32 mx-auto">
+<section class="container flex flex-col items-center py-32 mx-auto w-full">
 	<div class="w-full mx-auto text-left md:w-11/12 xl:w-8/12 md:text-center">
 		<h1
 			class="mb-3 text-4xl font-bold text-gray-900 dark:text-gray-400 md:text-5xl md:leading-tight md:font-extrabold"
@@ -57,7 +57,6 @@
     py-12
     mx-auto
     md:px-12
-    lg:px-24
     max-w-7xl
   "
 		>
