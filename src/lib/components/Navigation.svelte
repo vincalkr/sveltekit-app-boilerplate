@@ -5,6 +5,24 @@
 	export function show() {
 		shown = !shown;
 	}
+
+	export function clickOutside(node) {
+		const handleClick = (event) => {
+			if (!node.contains(event.target) && event.target.id !== 'tab') {
+				console.log(event.target.id);
+				console.log(event.target.nodeName);
+				node.dispatchEvent(new CustomEvent('outclick'));
+			}
+		};
+
+		document.addEventListener('click', handleClick, true);
+
+		return {
+			destroy() {
+				document.removeEventListener('click', handleClick, true);
+			}
+		};
+	}
 </script>
 
 <div class="h-full w-full">
@@ -18,153 +36,180 @@
 					>
 						<div id="menu" class="visible xl:hidden">
 							{#if shown}
-								<ul
-									transition:fly={{ x: 200, duration: 200 }}
-									class="py-2 border-r bg-purple-50 absolute rounded left-0 right-0 shadow mt-8 md:mt-8"
-								>
-									<a href="/">
-										<li
-											class=" border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none"
-										>
-											<div class="flex items-center">
+								<div use:clickOutside on:outclick={() => (shown = false)}>
+									<ul
+										transition:fly={{ x: 200, duration: 200 }}
+										class="py-2 border-r bg-purple-50 absolute rounded left-0 right-0 shadow mt-8 md:mt-8"
+									>
+										<a href="/">
+											<li
+												class=" border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none"
+											>
+												<div class="flex items-center">
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														class="icon icon-tabler icon-tabler-grid"
+														width="20"
+														height="20"
+														viewBox="0 0 24 24"
+														stroke-width="1.5"
+														stroke="currentColor"
+														fill="none"
+														stroke-linecap="round"
+														stroke-linejoin="round"
+													>
+														<path stroke="none" d="M0 0h24v24H0z" />
+														<rect x="4" y="4" width="6" height="6" rx="1" />
+														<rect x="14" y="4" width="6" height="6" rx="1" />
+														<rect x="4" y="14" width="6" height="6" rx="1" />
+														<rect x="14" y="14" width="6" height="6" rx="1" />
+													</svg>
+													<span class="ml-2 font-bold">Home</span>
+												</div>
+											</li>
+										</a>
+										<a href="/gallery">
+											<li
+												class=" border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none"
+											>
+												<div class="flex items-center">
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														width="16"
+														height="16"
+														viewBox="0 0 24 24"
+														fill="none"
+														stroke="#000000"
+														stroke-width="2"
+														stroke-linecap="round"
+														stroke-linejoin="round"
+														><rect x="3" y="3" width="18" height="18" rx="2" /><circle
+															cx="8.5"
+															cy="8.5"
+															r="1.5"
+														/><path d="M20.4 14.5L16 10 4 20" /></svg
+													>
+													<span class="ml-2 font-bold">Gallery</span>
+												</div>
+											</li>
+										</a>
+										<a href="/movies">
+											<li
+												class="border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden flex-col cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none justify-center"
+												onclick="dropdownHandler(this)"
+											>
+												<div class="flex items-center">
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														class="icon icon-tabler icon-tabler-puzzle"
+														width="20"
+														height="20"
+														viewBox="0 0 24 24"
+														stroke-width="1.5"
+														stroke="currentColor"
+														fill="none"
+														stroke-linecap="round"
+														stroke-linejoin="round"
+													>
+														<path stroke="none" d="M0 0h24v24H0z" />
+														<path
+															d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1"
+														/>
+													</svg>
+													<span class="ml-2 font-bold">Movies</span>
+												</div>
+											</li>
+										</a>
+										<a href="/pokedex">
+											<li
+												class="border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-2 hover:text-indigo-700 items-center focus:text-indigo-700 focus:outline-none"
+											>
 												<svg
 													xmlns="http://www.w3.org/2000/svg"
-													class="icon icon-tabler icon-tabler-grid"
-													width="20"
-													height="20"
-													viewBox="0 0 24 24"
-													stroke-width="1.5"
-													stroke="currentColor"
-													fill="none"
-													stroke-linecap="round"
-													stroke-linejoin="round"
+													width="16"
+													height="16"
+													fill="currentColor"
+													class="bi bi-dribbble"
+													viewBox="0 0 16 16"
 												>
-													<path stroke="none" d="M0 0h24v24H0z" />
-													<rect x="4" y="4" width="6" height="6" rx="1" />
-													<rect x="14" y="4" width="6" height="6" rx="1" />
-													<rect x="4" y="14" width="6" height="6" rx="1" />
-													<rect x="14" y="14" width="6" height="6" rx="1" />
-												</svg>
-												<span class="ml-2 font-bold">Home</span>
-											</div>
-										</li>
-									</a>
-									<a href="/movies">
-										<li
-											class="border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden flex-col cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none justify-center"
-											onclick="dropdownHandler(this)"
-										>
-											<div class="flex items-center">
-												<svg
-													xmlns="http://www.w3.org/2000/svg"
-													class="icon icon-tabler icon-tabler-puzzle"
-													width="20"
-													height="20"
-													viewBox="0 0 24 24"
-													stroke-width="1.5"
-													stroke="currentColor"
-													fill="none"
-													stroke-linecap="round"
-													stroke-linejoin="round"
-												>
-													<path stroke="none" d="M0 0h24v24H0z" />
 													<path
-														d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1"
+														fill-rule="evenodd"
+														d="M8 0C3.584 0 0 3.584 0 8s3.584 8 8 8c4.408 0 8-3.584 8-8s-3.592-8-8-8zm5.284 3.688a6.802 6.802 0 0 1 1.545 4.251c-.226-.043-2.482-.503-4.755-.217-.052-.112-.096-.234-.148-.355-.139-.33-.295-.668-.451-.99 2.516-1.023 3.662-2.498 3.81-2.69zM8 1.18c1.735 0 3.323.65 4.53 1.718-.122.174-1.155 1.553-3.584 2.464-1.12-2.056-2.36-3.74-2.551-4A6.95 6.95 0 0 1 8 1.18zm-2.907.642A43.123 43.123 0 0 1 7.627 5.77c-3.193.85-6.013.833-6.317.833a6.865 6.865 0 0 1 3.783-4.78zM1.163 8.01V7.8c.295.01 3.61.053 7.02-.971.199.381.381.772.555 1.162l-.27.078c-3.522 1.137-5.396 4.243-5.553 4.504a6.817 6.817 0 0 1-1.752-4.564zM8 14.837a6.785 6.785 0 0 1-4.19-1.44c.12-.252 1.509-2.924 5.361-4.269.018-.009.026-.009.044-.017a28.246 28.246 0 0 1 1.457 5.18A6.722 6.722 0 0 1 8 14.837zm3.81-1.171c-.07-.417-.435-2.412-1.328-4.868 2.143-.338 4.017.217 4.251.295a6.774 6.774 0 0 1-2.924 4.573z"
 													/>
 												</svg>
-												<span class="ml-2 font-bold">Movies</span>
-											</div>
-										</li>
-									</a>
-									<a href="/pokedex">
-										<li
-											class="border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-2 hover:text-indigo-700 items-center focus:text-indigo-700 focus:outline-none"
-										>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="16"
-												height="16"
-												fill="currentColor"
-												class="bi bi-dribbble"
-												viewBox="0 0 16 16"
+												<span class="ml-2 font-bold">Pokedex</span>
+											</li>
+										</a>
+										<a href="/orders">
+											<li
+												class="border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-2 hover:text-indigo-700 items-center focus:text-indigo-700 focus:outline-none"
 											>
-												<path
-													fill-rule="evenodd"
-													d="M8 0C3.584 0 0 3.584 0 8s3.584 8 8 8c4.408 0 8-3.584 8-8s-3.592-8-8-8zm5.284 3.688a6.802 6.802 0 0 1 1.545 4.251c-.226-.043-2.482-.503-4.755-.217-.052-.112-.096-.234-.148-.355-.139-.33-.295-.668-.451-.99 2.516-1.023 3.662-2.498 3.81-2.69zM8 1.18c1.735 0 3.323.65 4.53 1.718-.122.174-1.155 1.553-3.584 2.464-1.12-2.056-2.36-3.74-2.551-4A6.95 6.95 0 0 1 8 1.18zm-2.907.642A43.123 43.123 0 0 1 7.627 5.77c-3.193.85-6.013.833-6.317.833a6.865 6.865 0 0 1 3.783-4.78zM1.163 8.01V7.8c.295.01 3.61.053 7.02-.971.199.381.381.772.555 1.162l-.27.078c-3.522 1.137-5.396 4.243-5.553 4.504a6.817 6.817 0 0 1-1.752-4.564zM8 14.837a6.785 6.785 0 0 1-4.19-1.44c.12-.252 1.509-2.924 5.361-4.269.018-.009.026-.009.044-.017a28.246 28.246 0 0 1 1.457 5.18A6.722 6.722 0 0 1 8 14.837zm3.81-1.171c-.07-.417-.435-2.412-1.328-4.868 2.143-.338 4.017.217 4.251.295a6.774 6.774 0 0 1-2.924 4.573z"
-												/>
-											</svg>
-											<span class="ml-2 font-bold">Pokedex</span>
-										</li>
-									</a>
-									<a href="/orders">
-										<li
-											class="border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-2 hover:text-indigo-700 items-center focus:text-indigo-700 focus:outline-none"
-										>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="24"
-												height="24"
-												viewBox="0 0 24 24"
-												fill="none"
-												stroke="#000000"
-												stroke-width="2"
-												stroke-linecap="round"
-												stroke-linejoin="round"
-												><line x1="3" y1="12" x2="21" y2="12" /><line
-													x1="3"
-													y1="6"
-													x2="21"
-													y2="6"
-												/><line x1="3" y1="18" x2="21" y2="18" /></svg
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													width="24"
+													height="24"
+													viewBox="0 0 24 24"
+													fill="none"
+													stroke="#000000"
+													stroke-width="2"
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													><line x1="3" y1="12" x2="21" y2="12" /><line
+														x1="3"
+														y1="6"
+														x2="21"
+														y2="6"
+													/><line x1="3" y1="18" x2="21" y2="18" /></svg
+												>
+												<span class="ml-2 font-bold">Orders</span>
+											</li>
+										</a>
+										<a href="/file">
+											<li
+												class="border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-2 hover:text-indigo-700 items-center focus:text-indigo-700 focus:outline-none"
 											>
-											<span class="ml-2 font-bold">Orders</span>
-										</li>
-									</a>
-									<a href="/file">
-										<li
-											class="border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-2 hover:text-indigo-700 items-center focus:text-indigo-700 focus:outline-none"
-										>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="24"
-												height="24"
-												viewBox="0 0 24 24"
-												fill="none"
-												stroke="#000000"
-												stroke-width="2"
-												stroke-linecap="round"
-												stroke-linejoin="round"
-												><path
-													d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"
-												/><path d="M14 3v5h5M16 13H8M16 17H8M10 9H8" /></svg
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													width="24"
+													height="24"
+													viewBox="0 0 24 24"
+													fill="none"
+													stroke="#000000"
+													stroke-width="2"
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													><path
+														d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"
+													/><path d="M14 3v5h5M16 13H8M16 17H8M10 9H8" /></svg
+												>
+												<span class="ml-2 font-bold">File</span>
+											</li>
+										</a>
+										<a href="/blog">
+											<li
+												class="border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-2 hover:text-indigo-700 items-center focus:text-indigo-700 focus:outline-none"
 											>
-											<span class="ml-2 font-bold">File</span>
-										</li>
-									</a>
-									<a href="/blog">
-										<li
-											class="border rounded border-purple-200 hover:border hover:rounded hover:border-purple-600 hover:bg-purple-200 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-2 hover:text-indigo-700 items-center focus:text-indigo-700 focus:outline-none"
-										>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												class="icon icon-tabler icon-tabler-compass"
-												width="20"
-												height="20"
-												viewBox="0 0 24 24"
-												stroke-width="1.5"
-												stroke="currentColor"
-												fill="none"
-												stroke-linecap="round"
-												stroke-linejoin="round"
-											>
-												<path stroke="none" d="M0 0h24v24H0z" />
-												<polyline points="8 16 10 10 16 8 14 14 8 16" />
-												<circle cx="12" cy="12" r="9" />
-											</svg>
-											<span class="ml-2 font-bold">Blog</span>
-										</li>
-									</a>
-								</ul>
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													class="icon icon-tabler icon-tabler-compass"
+													width="20"
+													height="20"
+													viewBox="0 0 24 24"
+													stroke-width="1.5"
+													stroke="currentColor"
+													fill="none"
+													stroke-linecap="round"
+													stroke-linejoin="round"
+												>
+													<path stroke="none" d="M0 0h24v24H0z" />
+													<polyline points="8 16 10 10 16 8 14 14 8 16" />
+													<circle cx="12" cy="12" r="9" />
+												</svg>
+												<span class="ml-2 font-bold">Blog</span>
+											</li>
+										</a>
+									</ul>
+								</div>
 							{/if}
 						</div>
 					</div>
@@ -224,6 +269,30 @@
 								</svg>
 							</span>
 							Home
+						</a>
+						<a
+							href="/gallery"
+							class="focus:text-indigo-700 border-b-2 border-transparent focus:border-indigo-700 flex px-5 items-center py-6 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out"
+						>
+							<span class="mr-2">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="16"
+									height="16"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="#000000"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									><rect x="3" y="3" width="18" height="18" rx="2" /><circle
+										cx="8.5"
+										cy="8.5"
+										r="1.5"
+									/><path d="M20.4 14.5L16 10 4 20" /></svg
+								>
+							</span>
+							Gallery
 						</a>
 						<a
 							href="/movies"
@@ -393,9 +462,10 @@
 					/>
 				</svg>
 			</div>
-			<button on:click={show}>
+			<button on:click={show} id="tab">
 				<span>
 					<svg
+						id="tab"
 						xmlns="http://www.w3.org/2000/svg"
 						width="24"
 						height="24"
@@ -405,12 +475,13 @@
 						stroke-width="2"
 						stroke-linecap="round"
 						stroke-linejoin="round"
-						><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="6" x2="21" y2="6" /><line
+						><line id="tab" x1="3" y1="12" x2="21" y2="12" /><line
+							id="tab"
 							x1="3"
-							y1="18"
+							y1="6"
 							x2="21"
-							y2="18"
-						/></svg
+							y2="6"
+						/><line id="tab" x1="3" y1="18" x2="21" y2="18" /></svg
 					>
 				</span>
 			</button>
