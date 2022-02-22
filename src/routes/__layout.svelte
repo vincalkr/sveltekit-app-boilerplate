@@ -11,7 +11,6 @@
 <script lang="ts">
 	import '$lib/styles.css';
 	import '@fortawesome/fontawesome-free/css/all.css';
-	import 'prism-themes/themes/prism-vsc-dark-plus.css';
 	import { QueryClientProvider, QueryClient } from '@sveltestack/svelte-query';
 	import { page } from '$app/stores';
 	import Footer from '$lib/components/Footer.svelte';

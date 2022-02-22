@@ -76,7 +76,6 @@
 								</li>
 								<li
 									class="flex xl:hidden flex-col cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none justify-center"
-									onclick="dropdownHandler(this)"
 								>
 									<div class="flex items-center">
 										<svg
@@ -200,7 +199,6 @@
 								</li>
 							</ul>
 							<svg
-								onclick="MenuHandler(this,true)"
 								aria-haspopup="true"
 								aria-label="Main Menu"
 								xmlns="http://www.w3.org/2000/svg"
@@ -219,7 +217,8 @@
 								<line x1="4" y1="16" x2="20" y2="16" />
 							</svg>
 						</div>
-						<div class="hidden close-m-menu text-gray-700" onclick="MenuHandler(this,false)">
+						<div class="hidden close-m-menu text-gray-700"
+						>
 							<svg
 								aria-label="Close"
 								xmlns="http://www.w3.org/2000/svg"
@@ -316,30 +315,6 @@
 								</svg>
 							</span>
 							Movies
-						</a>
-						<a
-							href="/blog"
-							class="focus:text-indigo-700 border-b-2 border-transparent focus:border-indigo-700 flex px-5 items-center py-6 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out"
-						>
-							<span class="mr-2">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									class="icon icon-tabler icon-tabler-compass"
-									width="20"
-									height="20"
-									viewBox="0 0 24 24"
-									stroke-width="1.5"
-									stroke="currentColor"
-									fill="none"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								>
-									<path stroke="none" d="M0 0h24v24H0z" />
-									<polyline points="8 16 10 10 16 8 14 14 8 16" />
-									<circle cx="12" cy="12" r="9" />
-								</svg>
-							</span>
-							Blog
 						</a>
 						<a
 							href="javascript: void(0)"

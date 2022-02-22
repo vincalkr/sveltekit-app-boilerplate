@@ -4,42 +4,114 @@
 
 @layer base {
     :root {
-    }
-
-    .theme-swiss {
-        --color-primary: #395bbd;
-        --color-primary-dark: #14224a;
-    }
-
-    .theme-neon {
-        --color-primary: #20ffad;
-        --color-primary-dark: #0a422e;
-        --color-button-muted: 99, 102, 241;
+        --color-brand: '';
+        --color-primary: #0B486B;
+        --color-secondary: #A6CC44;
+        --color-accent: #37cdbe;
+        --color-info: #7EA9BF;
+        --color-success: #009485;
+        --color-warning: #ff9900;
+        --color-error: #ff5724;
     }
 }
 
 @layer components {
-    .btn {
-        @apply bg-indigo-500 mx-5 p-5 rounded-sm 
-        hover:scale-110
-        /* hover:scale-a  */
-        active:scale-75;
-    }
+  .btn {
+    @apply inline-flex
+           items-center
+           justify-center
+           w-full
+           h-12
+           px-6
+           font-medium
+           tracking-wide
+           text-white
+           transition
+           duration-200
+           rounded
+           shadow-md
+           bg-gray-400
+           hover:bg-gray-500
+           focus:shadow-none
+           focus:outline-none;
+  }
 
-    .square {
-        @apply absolute bg-button-muted bg-opacity-50 dark:bg-primary-dark dark:bg-opacity-50 w-5 h-5 p-5;
-    }
+  .btn-mini {
+    @apply h-8
+           w-20
+           text-sm;
+  }
+
+  .btn-primary {
+    @apply bg-blue-400
+           hover:bg-blue-500;
+  }
+  
+  .btn-info {
+    @apply bg-info;
+  }
+
+  .link {
+    @apply text-xs
+           cursor-pointer
+           underline
+           text-gray-600
+           sm:text-sm;
+  }
+
+  .btn-filter {
+    @apply absolute
+           p-2
+           h-8
+           w-24
+           rounded-full
+           bg-slate-400
+           text-white
+           text-sm
+           leading-none
+           transition
+           ring-4
+           hover:scale-105;
+  }
 }
 
 @layer utilities {
-    .p-111 {
-        @apply p-20 m-20 bg-blue-300;
-    }
-
-    @variants hover,
-    focus {
-        .p-111 {
-            @apply p-10 m-10 bg-blue-50;
+        .text-shadow {
+          text-shadow: 2px 2px 4px black;
         }
-    }
+        .text-shadow-md {
+          text-shadow: 4px 4px 8px black;
+        }
+        .text-shadow-lg {
+          text-shadow: 15px 15px 30px black;
+        }
+        .text-shadow-none {
+          text-shadow: none;
+        }
+}
+
+input[type='text'],
+input[type='password'],
+input[type='email'],
+input[type='number'],
+input[type='url'],
+input[type='date'],
+input[type='datetime-local'],
+input[type='month'],
+input[type='week'],
+input[type='time'],
+input[type='search'],
+input[type='tel'],
+input[type='checkbox'],
+input[type='radio'],
+select,
+select[multiple],
+textarea {
+    @apply w-full
+           /* bg-gray-100 */
+           rounded-lg
+           border-0
+           focus:ring-0
+           /* focus:bg-gray-200 */
+           transition duration-300;
 }

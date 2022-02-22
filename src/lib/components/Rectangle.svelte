@@ -1,6 +1,4 @@
 <script lang="ts">
-	// export let onDoubleClick: () => void;
-
 	import { createEventDispatcher, onDestroy, onMount } from 'svelte';
 
 	const dispatch = createEventDispatcher<{ trigger: string }>();
@@ -9,23 +7,23 @@
 		dispatch('trigger', `You have successfully triggered a CUSTOM EVENT`);
 	}
 
-    function action(node: HTMLElement) {
-        console.log(`Element mounted`);
+	function action(node: HTMLElement) {
+		console.log(`Element mounted`);
 
-        return {
-            destroy() {
-                console.log(`Element unmounted`);
-            },
-        };
-    }
+		return {
+			destroy() {
+				console.log(`Element unmounted`);
+			}
+		};
+	}
 
-    onMount(() => {
-        console.log(`Rectangle is mounted`);
-    });
+	onMount(() => {
+		console.log(`Rectangle is mounted`);
+	});
 
-    onDestroy(() => {
-        console.log(`Rectangle is unmounted`);
-    });
+	onDestroy(() => {
+		console.log(`Rectangle is unmounted`);
+	});
 </script>
 
 <div

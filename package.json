@@ -22,11 +22,9 @@
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-svelte3": "^3.2.1",
-		"mdsvex": "^0.9.8",
 		"postcss": "^8.4.4",
 		"prettier": "^2.4.1",
 		"prettier-plugin-svelte": "^2.4.0",
-		"prism-themes": "^1.9.0",
 		"svelte": "^3.42.6",
 		"svelte-check": "^2.2.6",
 		"svelte-preprocess": "^4.9.4",
@@ -41,10 +39,8 @@
 		"@sveltestack/svelte-query": "^1.4.1",
 		"@tailwindcss/forms": "^0.4.0",
 		"@tailwindcss/typography": "^0.5.0",
-		"@types/lodash": "^4.14.175",
 		"axios": "^0.23.0",
 		"graphql": "^15.7.2",
-		"graphql-request": "^3.6.1",
-		"lodash": "^4.17.21"
+		"graphql-request": "^3.6.1"
 	}
 }
