@@ -5,15 +5,24 @@ export const get: RequestHandler = async ({ params }) => {
 	const prisma = new PrismaClient();
 
 	const post = await prisma.post.findUnique({
-        where: {
-            id: params.id
-        },
+		where: {
+			id: params.id
+		},
 		include: {
-			author: true
+			author: true,
+			comment: {
+				include: {
+					author: {
+						select: {
+							name: true
+						}
+					}
+				}
+			}
 		}
-    });
+	});
 
 	return {
 		body: { post }
 	};
-}
+};

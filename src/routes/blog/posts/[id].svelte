@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { Post, User } from '@prisma/client';
+	import type { Post, User, Comment } from '@prisma/client';
 
-	export let post: Post & { author: User };
+	export let post: Post & { author: User; comment: (Comment & { author: User; })[] };
 </script>
 
 <article
@@ -77,5 +77,55 @@
 		<p>
 			{post.content}
 		</p>
+	</div>
+
+	<div class="w-full mx-auto md:w-3/4 lg:w-1/2">
+		<section class="rounded-b-lg  mt-4 ">
+			<form action="/" accept-charset="UTF-8" method="post">
+				<input type="hidden" />
+				<textarea
+					class="w-full shadow-inner p-4 border-0 mb-4 rounded-lg focus:shadow-outline text-2xl"
+					placeholder="Inserisci qui il tuo commento..."
+					cols="6"
+					rows="6"
+					id="comment_content"
+					spellcheck="false"
+				/>
+				<button
+					class="font-bold py-2 px-4 w-full bg-purple-400 text-lg text-white shadow-md rounded-lg "
+					>Commenta
+				</button>
+			</form>
+
+			<div id="task-comments" class="pt-4">
+
+                <!--     comment-->
+                {#each post.comment as comment}
+                    
+               
+				<div
+					class="bg-white rounded-lg p-3  flex flex-col justify-center items-center md:items-start shadow-lg mb-4"
+				>
+					<div class="flex flex-row justify-center mr-2">
+						<img
+							alt="avatar"
+							width="48"
+							height="48"
+							class="rounded-full w-10 h-10 mr-4 shadow-lg mb-4"
+							src="https://cdn1.iconfinder.com/data/icons/technology-devices-2/100/Profile-512.png"
+						/>
+						<h3 class="text-purple-600 font-semibold text-lg text-center md:text-left ">
+							@{comment.author.name}
+						</h3>
+					</div>
+
+					<p style="width: 90%" class="text-gray-600 text-lg text-center md:text-left ">
+						<span class="text-purple-600 font-semibold"></span> {comment.content}
+					</p>
+				</div>
+				<!--  comment end-->
+                {/each}
+			</div>
+		</section>
 	</div>
 </article>
