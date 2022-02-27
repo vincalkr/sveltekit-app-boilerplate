@@ -38,7 +38,7 @@
 
 <div class="h-full w-full">
 	<!-- Code block starts -->
-	<nav role="navigation" class="bg-white shadow xl:block hidden">
+	<nav class="bg-white shadow xl:block hidden">
 		<div class="mx-auto container px-6 py-2 xl:py-0">
 			<div class="flex items-center justify-between">
 				<div class="inset-y-0 left-0 flex items-center xl:hidden">
@@ -317,7 +317,7 @@
 							Movies
 						</a>
 						<a
-							href="javascript: void(0)"
+							href="/blog"
 							class="focus:text-indigo-700 border-b-2 border-transparent focus:border-indigo-700 flex px-5 items-center py-6 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out"
 						>
 							<span class="mr-2">
@@ -339,7 +339,7 @@
 									<line x1="14" y1="4" x2="10" y2="20" />
 								</svg>
 							</span>
-							Contacts
+							Blog
 						</a>
 					</div>
 					<div class="hidden xl:flex items-center" />
