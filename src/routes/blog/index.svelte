@@ -15,7 +15,7 @@
 </script>
 
 <script lang="ts">
-	export let posts: (Post & { author: User })[];
+	export let posts: (Post & { author: User; _count: { comment: number } })[];
 </script>
 
 <!-- svelte-ignore a11y-invalid-attribute -->
@@ -24,14 +24,12 @@
 	<div class="container p-6 mx-auto space-y-8">
 		<div class="space-y-2 text-center">
 			<h2 class="text-3xl font-bold">My Blog</h2>
-			<p class="font-serif text-sm text-coolGray-600">
-				Tech, business, and personal stories.
-			</p>
+			<p class="font-serif text-sm text-coolGray-600">Tech, business, and personal stories.</p>
 		</div>
 		<div class="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
 			{#each posts as post}
-				<article class="flex flex-col bg-coolGray-50">
-					<a href="#" aria-label="Te nulla oportere reprimique his dolorum">
+				<article class="flex flex-col bg-coolGray-50 shadow-md rounded">
+					<a href={`blog/posts/${post.id}`} aria-label="Te nulla oportere reprimique his dolorum">
 						<img
 							alt=""
 							class="object-cover w-full h-52 bg-coolGray-500"
@@ -48,7 +46,15 @@
 						</h3>
 						<span>{Intl.DateTimeFormat('it-IT').format(new Date(post.createdAt))}</span>
 						<div class="flex flex-wrap justify-between pt-3 space-x-2 text-xs text-coolGray-600">
-							<span>2.1K views</span>
+							{#if post._count.comment > 0}
+								<span
+									><strong>{post._count.comment}</strong> comment{(post._count.comment > 1 &&
+										'i') ||
+										'o'}</span
+								>
+							{:else}
+								<span>Nessun commento</span>
+							{/if}
 						</div>
 					</div>
 				</article>

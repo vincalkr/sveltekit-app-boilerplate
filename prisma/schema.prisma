@@ -17,8 +17,8 @@ model User {
   password  String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  Post      Post[]    @relation("author_post")
-  Comment   Comment[] @relation("author_comment")
+  post      Post[]    @relation("author_post")
+  comment   Comment[] @relation("author_comment")
 }
 
 model Post {
@@ -29,7 +29,7 @@ model Post {
   author    User      @relation(name: "author_post", fields: [authorId], references: [id])
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  Comment   Comment[] @relation("post_comment")
+  comment   Comment[] @relation("post_comment")
 }
 
 model Comment {
