@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Post, User, Comment } from '@prisma/client';
 
-	export let post: Post & { author: User; comment: (Comment & { author: User; })[] };
+	export let post: Post & { author: User; comment: (Comment & { author: User })[] };
 </script>
 
 <article
@@ -98,33 +98,31 @@
 			</form>
 
 			<div id="task-comments" class="pt-4">
+				<!--     comment-->
+				{#each post.comment as comment}
+					<div
+						class="bg-white rounded-lg p-3  flex flex-col justify-center items-center md:items-start shadow-lg mb-4"
+					>
+						<div class="flex flex-row justify-center mr-2">
+							<img
+								alt="avatar"
+								width="48"
+								height="48"
+								class="rounded-full w-10 h-10 mr-4 shadow-lg mb-4"
+								src="https://cdn1.iconfinder.com/data/icons/technology-devices-2/100/Profile-512.png"
+							/>
+							<h3 class="text-purple-600 font-semibold text-lg text-center md:text-left ">
+								@{comment.author.name}
+							</h3>
+						</div>
 
-                <!--     comment-->
-                {#each post.comment as comment}
-                    
-               
-				<div
-					class="bg-white rounded-lg p-3  flex flex-col justify-center items-center md:items-start shadow-lg mb-4"
-				>
-					<div class="flex flex-row justify-center mr-2">
-						<img
-							alt="avatar"
-							width="48"
-							height="48"
-							class="rounded-full w-10 h-10 mr-4 shadow-lg mb-4"
-							src="https://cdn1.iconfinder.com/data/icons/technology-devices-2/100/Profile-512.png"
-						/>
-						<h3 class="text-purple-600 font-semibold text-lg text-center md:text-left ">
-							@{comment.author.name}
-						</h3>
+						<p style="width: 90%" class="text-gray-600 text-lg text-center md:text-left ">
+							<span class="text-purple-600 font-semibold" />
+							{comment.content}
+						</p>
 					</div>
-
-					<p style="width: 90%" class="text-gray-600 text-lg text-center md:text-left ">
-						<span class="text-purple-600 font-semibold"></span> {comment.content}
-					</p>
-				</div>
-				<!--  comment end-->
-                {/each}
+					<!--  comment end-->
+				{/each}
 			</div>
 		</section>
 	</div>
