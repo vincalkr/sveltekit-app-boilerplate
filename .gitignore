@@ -5,3 +5,4 @@ node_modules
 /package
 .env
 prisma/db.sqlite
+package-lock.json
