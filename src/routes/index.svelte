@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { session } from '$app/stores';
 	import { blur, fade } from 'svelte/transition';
 	import Rectangle from '$lib/components/Rectangle.svelte';
 
@@ -8,6 +9,8 @@
 	onMount(() => {
 		visible = true;
 	});
+
+	$: console.log({ session: $session })
 </script>
 
 <section class="container flex flex-col items-center py-32 mx-auto">
