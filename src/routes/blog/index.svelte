@@ -20,8 +20,6 @@
 	export let posts: (Post & { author: User; _count: { comment: number } })[];
 </script>
 
-<!-- svelte-ignore a11y-invalid-attribute -->
-<!-- svelte-ignore a11y-missing-content -->
 <section class="py-6 sm:py-12 bg-coolGray-100 text-coolGray-800">
 	<div class="container p-6 mx-auto space-y-8">
 		<div class="space-y-2 text-center">

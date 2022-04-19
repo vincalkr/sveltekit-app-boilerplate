@@ -2,6 +2,7 @@ import trpcTransformer from '$lib/server/trpc/trcpTransformer';
 import type { inferAsyncReturnType } from '@trpc/server';
 import cookie_pkg from 'cookie';
 import * as trpc from '@trpc/server';
+import auth from './auth';
 import posts from './posts';
 import jsonwebtoken from 'jsonwebtoken';
 const cookie = cookie_pkg;
@@ -27,6 +28,7 @@ export const createContext = (request: Request) => {
 export const router = trpc
 	.router<inferAsyncReturnType<typeof createContext>>()
 	.transformer(trpcTransformer)
+	.merge('auth:', auth)
 	.merge('posts:', posts);
 
 export type Router = typeof router;
