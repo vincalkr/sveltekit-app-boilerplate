@@ -1,35 +1,30 @@
-import path from 'path';
+import adapter from '@sveltejs/adapter-node';
 import preprocess from 'svelte-preprocess';
 import { imagetools } from 'vite-imagetools';
-import staticAdapter from '@sveltejs/adapter-static';
-import serverAdapter from '@sveltejs/adapter-node';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-    extensions: [".svelte"],
-    // Consult https://github.com/sveltejs/svelte-preprocess
-    // for more information about preprocessors
-    preprocess: [preprocess({
+	// Consult https://github.com/sveltejs/svelte-preprocess
+	// for more information about preprocessors
+	preprocess: preprocess({
 		postcss: true,
-		defaults: {
-			style: 'postcss'
-		}
-	})],
-
-    kit: {
-		// hydrate the <div id="svelte"> element in src/app.html
-		adapter: staticAdapter(),
-		vite: {
-			optimizeDeps: { include: ['broadcast-channel'] },
-			plugins: [imagetools({force: true})],
-			resolve: {
-				alias: {
-					$assets: path.resolve('./src/lib/assets'),
-					$lib: path.resolve('./src/lib')
+	}),
+	kit: {
+		vite: process.env.NODE_ENV === 'production'
+				? {
+					optimizeDeps: { include: ['broadcast-channel'] },
+					ssr: {
+					noExternal: ['superjson'],
+					},
 				}
-			}
-		}
-	}
+				: {
+					plugins: [imagetools({ force: true })]
+				}
+		},
+		serviceWorker: {
+			register: false
+		},
+		adapter: adapter()
 };
 
 export default config;

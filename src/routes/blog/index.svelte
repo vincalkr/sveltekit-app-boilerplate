@@ -1,17 +1,19 @@
 <script lang="ts" context="module">
 	import type { Load } from '@sveltejs/kit';
-	import type { Post, User } from '@prisma/client';
-
+	import trpc from '$lib/trpcClient';
+ 
 	export const load: Load = async ({ fetch }) => {
-		const response = await fetch('/blog/posts');
-		const posts: Post[] = await response.json();
+		const trpcClient = trpc(fetch);
+
+		const posts = await trpcClient.query('posts:list');
 
 		return {
 			props: {
 				posts
 			}
-		};
-	};
+		}
+	}
+
 </script>
 
 <script lang="ts">

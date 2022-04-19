@@ -1,3 +1,21 @@
+<script lang="ts" context="module">
+	import type { Load } from '@sveltejs/kit';
+	import trpc from '$lib/trpcClient';
+ 
+	export const load: Load = async ({ fetch, params }) => {
+		const trpcClient = trpc(fetch);
+
+		const post = await trpcClient.query('posts:getById', params.id);
+
+		return {
+			props: {
+				post
+			}
+		}
+	}
+
+</script>
+
 <script lang="ts">
 	import type { Post, User, Comment } from '@prisma/client';
 

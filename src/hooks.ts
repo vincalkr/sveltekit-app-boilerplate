@@ -1,23 +1,18 @@
-import type { GetSession } from "@sveltejs/kit";
+import { createContext, router } from '$lib/server/trpc';
+import type { GetSession, Handle } from '@sveltejs/kit';
+import { sequence } from '@sveltejs/kit/hooks';
+import { createTRPCHandle } from 'trpc-sveltekit';
 
-export const getSession: GetSession = ({ locals }) => {
-    // return event.locals.user
-    //   ? {
-    //       user: {
-    //         // only include properties needed client-side —
-    //         // exclude anything else attached to the user
-    //         // like access tokens etc
-    //         name: event.locals.user.name,
-    //         email: event.locals.user.email,
-    //         avatar: event.locals.user.avatar
-    //       }
-    //     }
-    //   : {};
-    return { 
-        user: { 
-            name: 'John Doe',
-            email: 'johndoe@mail.com',
-            avatar: 'https://svelte.dev/images/avatar.jpg' 
-        } 
-    };
-  }
+const skHandle: Handle = async ({ event, resolve }) => {
+
+	const response = await resolve(event);
+	return response;
+};
+
+const trpcHandle = createTRPCHandle({ url: '/trpc', router, createContext });
+
+export const handle = sequence(skHandle, trpcHandle);
+
+export const getSession: GetSession = async ({ locals }) => {
+	return locals;
+};
