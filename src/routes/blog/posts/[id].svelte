@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
 	import type { Load } from '@sveltejs/kit';
 	import trpc from '$lib/trpcClient';
- 
+
 	export const load: Load = async ({ fetch, params }) => {
 		const trpcClient = trpc(fetch);
 
@@ -11,19 +11,28 @@
 			props: {
 				post
 			}
-		}
-	}
-
+		};
+	};
 </script>
 
 <script lang="ts">
 	import type { Post, User, Comment } from '@prisma/client';
+	import { onMount } from 'svelte';
 
 	export let post: Post & { author: User; comment: (Comment & { author: User })[] };
+
+	onMount(async () => {
+		const result = await trpc().query('auth:login', {
+			email: 'text@mail.com',
+			password: 'password'
+		});
+
+		console.log({ result })
+	});
 </script>
 
 <article
-	class="px-4 py-24 mx-auto max-w-7xl"
+	class="px-4 py-24 mx-auto max-w-7sxl"
 	itemid="#"
 	itemscope
 	itemtype="http://schema.org/BlogPosting"

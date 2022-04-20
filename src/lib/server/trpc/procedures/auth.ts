@@ -6,14 +6,14 @@ import jsonwebtoken from 'jsonwebtoken';
 import { TRPCError } from '@trpc/server';
 import Decimal from 'decimal.js';
 import { z } from 'zod';
-import type { createContext } from '.';
+import type { createContext } from '..';
 
 export default trpc
   .router<ReturnType<typeof createContext>>()
   .query('login', {
     input: z.object({
-      email: z.string().email(),
-      password: z.string(),
+      email: z.string().email().transform(trim),
+      password: z.string().transform(trim),
     }),
     resolve: async ({ input, ctx }) => {
       const user = await prisma.user.findUnique({
@@ -22,7 +22,12 @@ export default trpc
         },
       });
 
-      if (await argon2.verify(user.password, input.password)) {
+      if(!process.env.VITE_JWT_SECRET) {
+          console.error('JWT Secret not set');
+          return {};
+      }
+
+      if (user && await argon2.verify(user.password, input.password)) {
         const token = jsonwebtoken.sign({
           id: user.id,
           email: user.email
@@ -34,5 +39,7 @@ export default trpc
           token,
         };
       }
+
+      return {};
     },
   })

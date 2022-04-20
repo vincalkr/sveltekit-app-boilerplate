@@ -4,16 +4,16 @@ import * as trpc from '@trpc/server';
 import { TRPCError } from '@trpc/server';
 import Decimal from 'decimal.js';
 import { z } from 'zod';
-import type { createContext } from '.';
+import type { createContext } from '..';
 
 export default trpc
   .router<ReturnType<typeof createContext>>()
-  .middleware(async ({ ctx, next }) => {
-    if (!ctx.isAuth) {
-      throw new TRPCError({ code: 'UNAUTHORIZED' });
-    }
-    return next()
-  })
+  // .middleware(async ({ ctx, next }) => {
+  //   if (!ctx.isAuth) {
+  //     throw new TRPCError({ code: 'UNAUTHORIZED' });
+  //   }
+  //   return next()
+  // })
 //   .query('browse', {
 //     input: z.string().optional(),
 //     resolve: ({ input }) =>
