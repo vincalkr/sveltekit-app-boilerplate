@@ -17,6 +17,7 @@
 </script>
 
 <script lang="ts">
+	import type { Post, User, Comment } from '@prisma/client';
 	export let posts: (Post & { author: User; _count: { comment: number } })[];
 </script>
 

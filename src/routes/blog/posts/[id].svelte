@@ -21,14 +21,14 @@
 
 	export let post: Post & { author: User; comment: (Comment & { author: User })[] };
 
-	onMount(async () => {
-		const result = await trpc().query('auth:login', {
-			email: 'text@mail.com',
-			password: 'password'
-		});
+	// onMount(async () => {
+	// 	const result = await trpc().query('auth:login', {
+	// 		email: 'text@mail.com',
+	// 		password: 'password'
+	// 	});
 
-		console.log({ result })
-	});
+	// 	console.log({ result })
+	// });
 </script>
 
 <article

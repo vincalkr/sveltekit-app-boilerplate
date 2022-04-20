@@ -12,7 +12,7 @@ export const createContext = (request: Request) => {
 	let isAuth = false;
 
 	const { token } = cookie.parse(request.headers.get('cookie') || '');
-
+	
 	if (token) {
 		jsonwebtoken.verify(token, process.env.VITE_JWT_SECRET, (err) => {
 			if (err) {
