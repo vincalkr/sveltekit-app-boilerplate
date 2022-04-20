@@ -27,10 +27,10 @@ export const createContext = (request: Request) => {
 };
 
 export const responseMeta: ResponseMetaFn<AnyRouter> = ({ type, ctx, data, paths }) => {
-	if(paths.includes('auth:login') && Object(data).token) {
+	if(paths.includes('auth:login') && Object(data[0]).result?.data?.token) {
 		return {
 			headers: {
-				'Set-Cookie': cookie.serialize('token', Object(data).token, {
+				'Set-Cookie': cookie.serialize('token', Object(data[0]).result.data.token, {
 					httpOnly: true,
 					maxAge: 60 * 60 * 24 * 7,
 					path: '/',

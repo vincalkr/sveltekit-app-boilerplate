@@ -59,6 +59,7 @@
 		"superjson": "^1.8.1",
 		"svelte-forms-lib": "^2.0.1",
 		"trpc-sveltekit": "^1.2.3",
+		"yup": "^0.32.11",
 		"zod": "^3.14.4"
 	}
 }

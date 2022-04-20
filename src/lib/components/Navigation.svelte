@@ -342,14 +342,14 @@
 							Blog
 						</a>
 						<a
-						href="/auth/register"
+						href="/auth/login"
 						class="focus:text-indigo-700 border-b-2 border-transparent focus:border-indigo-700 flex px-5 items-center py-6 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out"
 					>
 						<span class="mr-2 flex gap-1">
 							<svg xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" width="20" height="20"  stroke="currentColor" stroke-width="1.5">
 								<path stroke-linecap="round" stroke-linejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
 							</svg>
-						Auth
+						Login
 					</a>
 					</div>
 					<div class="hidden xl:flex items-center" />
