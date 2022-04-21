@@ -22,9 +22,9 @@ export default trpc
         },
       });
 
-      if(!process.env.VITE_JWT_SECRET) {
-          console.error('JWT Secret not set');
-          return {};
+      if (!process.env.VITE_JWT_SECRET) {
+        console.error('JWT Secret not set');
+        return {};
       }
 
       if (user && await argon2.verify(user.password, input.password)) {
@@ -32,14 +32,23 @@ export default trpc
           id: user.id,
           email: user.email
         }, process.env.VITE_JWT_SECRET, {
-          expiresIn: '7d'
+          expiresIn: process.env.VITE_COOKIE_EXPIRE
         });
 
         return {
           token,
+          user: {
+            id: user.id,
+            email: user.email
+          }
         };
       }
 
       return {};
     },
+  })
+  .query('logout', {
+    resolve: async ({ ctx }) => {
+      return {};
+    }
   })

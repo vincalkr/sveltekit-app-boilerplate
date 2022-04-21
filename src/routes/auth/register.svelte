@@ -1,10 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import z from 'zod';
-	// import { useRegistration } from '$lib/features/auth/queries';
+	import * as yup from 'yup';
 	import { createForm } from 'svelte-forms-lib';
-
-	// const registration = useRegistration();
 
 	const { form, errors, state, handleChange, handleSubmit } = createForm({
 		initialValues: {
@@ -12,11 +9,11 @@
 			password: '',
 			passwordConfirmation: ''
 		},
-		validationSchema: z.object({
-			email: z.string().nonempty('Email obbligatoria').email('Formato email non valido'),
-			password: z
+		validationSchema: yup.object().shape({
+			email: yup.string().required('Email obbligatoria').email('Formato email non valido'),
+			password: yup
 				.string()
-				.nonempty('Password obbligatoria')
+				.required('Password obbligatoria')
 				.min(8, 'Deve contenere almeno 8 caratteri')
 		}),
 		onSubmit: (values) => {

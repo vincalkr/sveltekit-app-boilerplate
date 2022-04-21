@@ -6,40 +6,55 @@ import auth from './procedures/auth';
 import posts from './procedures/posts';
 import jsonwebtoken from 'jsonwebtoken';
 import type { ResponseMetaFn } from 'trpc-sveltekit/dist/types';
+import type { CreateContextOutput, UserInfo } from '../types';
 const cookie = cookie_pkg;
 
-export const createContext = (request: Request) => {
-	let isAuth = false;
-
+export const createContext = (request: Request): CreateContextOutput => {
 	const { token } = cookie.parse(request.headers.get('cookie') || '');
-	
-	if (token) {
-		jsonwebtoken.verify(token, process.env.VITE_JWT_SECRET, (err) => {
-			if (err) {
-				isAuth = false;
-			}
+	let user: UserInfo | null = null;
 
-			isAuth = true;
+	if (token) {
+		jsonwebtoken.verify(token, process.env.VITE_JWT_SECRET!, (err, payload: UserInfo) => {
+			if (!err) {
+				user = payload;
+			}
 		});
 	}
 
-	return { isAuth };
+	return {
+		user
+	};
 };
 
 export const responseMeta: ResponseMetaFn<AnyRouter> = ({ type, ctx, data, paths }) => {
-	if(paths.includes('auth:login') && Object(data[0]).result?.data?.token) {
-		return {
-			headers: {
-				'Set-Cookie': cookie.serialize('token', Object(data[0]).result.data.token, {
-					httpOnly: true,
-					maxAge: 60 * 60 * 24 * 7,
-					path: '/',
-					sameSite: 'strict',
-					secure: process.env.NODE_ENV === 'production',
-				}),
-			},
-		};
-	} 
+	switch (true) {
+		case paths?.includes('auth:login'): {
+			if (Object(data[0]).result?.data?.token) {
+				return {
+					headers: {
+						'Set-Cookie': cookie.serialize('token', Object(data[0]).result.data.token, {
+							httpOnly: true,
+							maxAge: Number(process.env.VITE_COOKIE_EXPIRE),
+							path: '/',
+							sameSite: 'strict',
+							secure: process.env.NODE_ENV === 'production',
+						}),
+					},
+				};
+			}
+		}
+		case paths?.includes('auth:logout'): {
+			return {
+				headers: {
+					'Set-Cookie': cookie.serialize('token', '', {
+						path: '/',
+						maxAge: 0,
+						httpOnly: true
+					})
+				}
+			}
+		}
+	}
 
 	return {};
 }

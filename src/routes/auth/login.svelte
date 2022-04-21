@@ -2,8 +2,14 @@
 	import type { User } from '@prisma/client';
 	import { createForm } from 'svelte-forms-lib';
 	import * as yup from 'yup';
-    import trpc from '$lib/trpcClient';
+	import trpc from '$lib/trpcClient';
+	import { useMutation, useQuery } from '@sveltestack/svelte-query';
+	import { goto } from '$app/navigation';
 	// import { actions as authenticationActions } from '$lib/store/authenticationState';
+
+	const login = useMutation(['auth:login'], (values: any) =>
+		trpc().query('auth:login', { email: values.email!, password: values.password! })
+	);
 
 	const { form, errors, state, handleChange, handleSubmit } = createForm<Partial<User>>({
 		initialValues: {
@@ -23,11 +29,19 @@
 		onSubmit: async (values) => {
 			delete values['undefined'];
 
-            const result = await trpc().query('auth:login', { email: values.email!, password: values.password! });
-            console.log({ result });
-			// authenticationActions.login(values);
+			// const { token, user } = await trpc().query('auth:login', { email: values.email!, password: values.password! });
+
+			$login.mutate({
+				email: values.email!,
+				password: values.password!
+			});
 		}
 	});
+
+	$: if ($login.isSuccess) {
+		// goto('/');
+		console.log($login.data);
+	}
 </script>
 
 <div class="relative h-screen">

@@ -9,34 +9,11 @@ import type { createContext } from '..';
 export default trpc
   .router<ReturnType<typeof createContext>>()
   .middleware(async ({ ctx, next }) => {
-    if (!ctx.isAuth) {
+    if (!ctx.user) {
       throw new TRPCError({ code: 'UNAUTHORIZED' });
     }
-    return next()
+    return next();
   })
-//   .query('browse', {
-//     input: z.string().optional(),
-//     resolve: ({ input }) =>
-//       prismaClient.book.findMany({
-//         select: {
-//           id: true,
-//           title: true,
-//           author: { select: { firstName: true, lastName: true } }, 
-//           price: true,
-//           updatedAt: true
-//         },
-//         where: input
-//           ? {
-//               OR: [
-//                 { title: { contains: input } },
-//                 { author: { firstName: { contains: input } } },
-//                 { author: { lastName: { contains: input } } }
-//               ]
-//             }
-//           : undefined,
-//         orderBy: [{ title: 'asc' }]
-//       })
-//   }) 
   .query('list', {
     input: z.object({
       title: z.string().optional(),
@@ -47,7 +24,7 @@ export default trpc
           title: {
             startsWith: input.title,
           }
-        },
+        } || undefined,
         include: {
           author: {
             select: {
