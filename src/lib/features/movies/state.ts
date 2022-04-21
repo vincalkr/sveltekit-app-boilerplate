@@ -2,7 +2,7 @@ import { writable } from 'svelte/store';
 import type { Movie } from './types';
 
 export interface MoviesState {
-	selected: Movie;
+	selected: Movie | null;
 }
 
 const initialState: MoviesState = {

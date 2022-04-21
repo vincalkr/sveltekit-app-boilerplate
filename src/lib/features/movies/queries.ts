@@ -1,6 +1,6 @@
 import { useQuery } from '@sveltestack/svelte-query';
 import type { AxiosError } from 'axios';
-import { searchMovies } from './api';
+import axios from 'axios';
 import type { Movie } from './types';
 
 export enum ServerStateKeysEnum {
@@ -9,5 +9,5 @@ export enum ServerStateKeysEnum {
 
 export const useGetMovies = (name: string) =>
 	useQuery<Movie[], AxiosError<Movie, Movie>>([ServerStateKeysEnum.Movies, name], () =>
-	searchMovies(name)
+	axios.get(`https://api.tvmaze.com/search/shows?q=${name}`).then(res => res.data)
 	);

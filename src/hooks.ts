@@ -9,10 +9,10 @@ const skHandle: Handle = async ({ event, resolve }) => {
 	return response;
 };
 
-const trpcHandle = createTRPCHandle({ url: '/trpc', router, createContext, responseMeta});
+const trpcHandle = createTRPCHandle({ url: '/trpc', router, createContext, responseMeta });
 
 export const handle = sequence(skHandle, trpcHandle);
 
-export const getSession: GetSession = async ({ locals }) => {
-	return locals;
+export const getSession: GetSession = async ({ request }) => {
+	return createContext(request);
 };
