@@ -16,7 +16,7 @@ export default trpc
   })
   .query('list', {
     input: z.object({
-      title: z.string().optional(),
+      title: z.string(),
     }).optional(),
     resolve: ({ input, ctx }) => {
       return prisma.post.findMany({
