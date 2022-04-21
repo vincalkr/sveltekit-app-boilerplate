@@ -3,7 +3,6 @@
 	import { createForm } from 'svelte-forms-lib';
 	import * as yup from 'yup';
 	import trpc from '$lib/trpcClient';
-	import { useMutation, useQuery } from '@sveltestack/svelte-query';
 	import { goto } from '$app/navigation';
 
 	const { form, errors, state, handleChange, handleSubmit } = createForm<Partial<User>>({
@@ -25,6 +24,8 @@
 			delete values['undefined'];
 
 			const { token, user } = await trpc().query('auth:login', { email: values.email!, password: values.password! });
+
+			goto('/');
 		}
 	});
 
