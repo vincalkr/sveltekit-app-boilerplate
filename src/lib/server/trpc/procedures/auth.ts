@@ -6,7 +6,7 @@ import jsonwebtoken from 'jsonwebtoken';
 import { TRPCError } from '@trpc/server';
 import Decimal from 'decimal.js';
 import { z } from 'zod';
-import type { createContext } from '..';
+import type { createContext, UserInfo } from '..';
 
 export default trpc
   .router<ReturnType<typeof createContext>>()
@@ -40,7 +40,7 @@ export default trpc
           user: {
             id: user.id,
             email: user.email
-          }
+          } as UserInfo
         };
       }
 

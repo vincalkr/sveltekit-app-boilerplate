@@ -4,6 +4,7 @@
 	import * as yup from 'yup';
 	import trpc from '$lib/trpcClient';
 	import { goto } from '$app/navigation';
+	import { actions as authActions } from '$lib/features/auth/state';
 
 	const { form, errors, state, handleChange, handleSubmit } = createForm<Partial<User>>({
 		initialValues: {
@@ -24,6 +25,8 @@
 			delete values['undefined'];
 
 			const { token, user } = await trpc().query('auth:login', { email: values.email!, password: values.password! });
+
+			authActions.setUser(user!);
 
 			goto('/blog');
 		}
