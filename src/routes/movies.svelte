@@ -1,7 +1,4 @@
 <script lang="ts">
-	export let msg: string;
-	export let host: string;
-
 	import moviesState, { actions as moviesActions } from '$lib/features/movies/state';
 	import { useGetMovies } from '$lib/features/movies/queries';
 	import type { Movie } from '$lib/features/movies/types';
@@ -20,10 +17,9 @@
 	<title>TV show information</title>
 </svelte:head>
 
-<!-- {@debug msg, host} -->
+{@debug search}
 
 <div class="theme-neon grid grid-cols-1 md:grid-cols-1 m-5 justify-items-center">
-	<div class="dark:text-white">{`SSR Rendering: ${host} - ${msg}`}</div>
 	<div class="flex flex-col m-3 dark:text-white">
 		{#if $moviesState.selected}
 			<div class="flex space-x-1 border-2 p-2 mb-2 rounded-md items-center animate-pulse">
@@ -72,7 +68,7 @@
 										Score: {movie.score.toFixed(1)}
 									</p>
 								</div>
-								<div class="hover:cursor-pointer" role="img" aria-label="bookmark" on:click={() => selectMovieHandler(Array($movies.data).at[i])}>
+								<div class="hover:cursor-pointer" role="img" aria-label="bookmark" on:click={() => selectMovieHandler(Object($movies.data)[i])}>
 									<svg
 										class="focus:outline-none"
 										width="28"
