@@ -25,15 +25,14 @@
 
 			const { token, user } = await trpc().query('auth:login', { email: values.email!, password: values.password! });
 
-			goto('/');
+			goto('/blog');
 		}
 	});
 
 </script>
 
-<div class="relative h-screen">
-	<!-- <img src="/ukraine-flag.jpeg" class="absolute inset-0 object-cover w-full h-full" alt="" /> -->
-	<div class="relative bg-opacity-50 bg-blue-700 h-screen ">
+<div class="relative">
+	<div class="relative bg-opacity-50 bg-blue-700 pt-10 h-[90vh]">
 		<svg class="absolute inset-x-0 bottom-0 text-white" viewBox="0 0 1160 163">
 			<path
 				fill="#f3d43561"
@@ -48,18 +47,18 @@
 					<h2
 						class="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-white sm:text-4xl sm:leading-none"
 					>
-						Benvenuto <br class="hidden md:block" />
-						questo è l'accesso all'area customer care
+						Welcome <br class="hidden md:block" />
+						
 					</h2>
 					<p class="max-w-xl mb-4 text-base text-gray-200 md:text-lg">
-						Le credenziali per effettuare l'accesso ti verranno consegnate via email.
+						Login credentials will be sent to you via email
 					</p>
 					<a
 						href="/"
 						aria-label=""
 						class="inline-flex items-center font-semibold tracking-wider transition-colors duration-200 text-white hover:text-teal-accent-700"
 					>
-						Ulteriori informazioni
+						More informations
 						<svg class="inline-block w-3 ml-2" fill="currentColor" viewBox="0 0 12 12">
 							<path
 								d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z"
@@ -70,7 +69,7 @@
 				<div class="w-full max-w-xl xl:px-8 xl:w-5/12">
 					<div class="bg-white rounded shadow-2xl p-7 sm:p-10">
 						<h3 class="mb-4 text-xl font-semibold sm:text-center sm:mb-6 sm:text-2xl">
-							Area riservata
+							Reserved area
 						</h3>
 						<form on:submit|preventDefault={handleSubmit}>
 							<div class="mb-1 sm:mb-2">

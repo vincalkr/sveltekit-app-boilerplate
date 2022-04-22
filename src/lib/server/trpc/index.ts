@@ -6,8 +6,15 @@ import auth from './procedures/auth';
 import posts from './procedures/posts';
 import jsonwebtoken from 'jsonwebtoken';
 import type { ResponseMetaFn } from 'trpc-sveltekit/dist/types';
-import type { CreateContextOutput, UserInfo } from '../types';
 const cookie = cookie_pkg;
+export interface UserInfo {
+  id: string;
+  email: string;
+}
+
+export interface CreateContextOutput {
+  user: UserInfo | null;
+}
 
 export const createContext = (request: Request): CreateContextOutput => {
 	const { token } = cookie.parse(request.headers.get('cookie') || '');

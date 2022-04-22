@@ -1,11 +1,22 @@
 <script lang="ts" context="module">
 	import type { Load } from '@sveltejs/kit';
-	import trpc from '$lib/trpcClient';
+	import trpc, { isTRPCClientError } from '$lib/trpcClient';
  
 	export const load: Load = async ({ fetch }) => {
 		const trpcClient = trpc(fetch);
 
-		const posts = await trpcClient.query('posts:list');
+		let posts;
+
+		try {
+			posts = await trpcClient.query('posts:list');
+		} 
+		catch(exception) {
+			if(isTRPCClientError(exception)) {
+				return {
+					status: exception.data?.httpStatus,	
+				}
+			}
+		}
 
 		return {
 			props: {
@@ -18,6 +29,7 @@
 
 <script lang="ts">
 	import type { Post, User, Comment } from '@prisma/client';
+
 	export let posts: (Post & { author: User; _count: { comment: number } })[];
 </script>
 

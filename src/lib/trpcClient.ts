@@ -1,8 +1,14 @@
 import { browser } from '$app/env';
-import type { Router } from '$lib/server/trpc';
+import type { router, Router } from '$lib/server/trpc';
 import trpcTransformer from '$lib/server/trpc/trcpTransformer';
 import * as trpc from '@trpc/client';
 import type { inferProcedureInput, inferProcedureOutput } from '@trpc/server';
+import type { TRPCClientErrorLike } from "@trpc/client";
+import { TRPCClientError } from "@trpc/client";
+
+export function isTRPCClientError(exception: any): exception is TRPCClientErrorLike<typeof router> {
+  return exception instanceof TRPCClientError;
+}
 
 const url = browser ? '/trpc' : 'http://localhost:3000/trpc';
 export default (loadFetch?: typeof fetch) =>

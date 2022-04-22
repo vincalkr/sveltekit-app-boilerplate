@@ -1,22 +1,10 @@
-<script lang="ts" context="module">
-	import type { Load } from '@sveltejs/kit';
-	export const load: Load = ({ url: { host } }) => {
-		return {
-			props: {
-				msg: 'Server Side',
-				host
-			}
-		};
-	}
-</script>
-
 <script lang="ts">
 	export let msg: string;
 	export let host: string;
 
-	import moviesState, { actions as moviesActions } from '../lib/features/movies/state';
-	import { useGetMovies } from '../lib/features/movies/queries';
-	import type { Movie } from '../lib/features/movies/types';
+	import moviesState, { actions as moviesActions } from '$lib/features/movies/state';
+	import { useGetMovies } from '$lib/features/movies/queries';
+	import type { Movie } from '$lib/features/movies/types';
 
 	let search: string = 'matrix';
 
@@ -26,9 +14,6 @@
 		moviesActions.select(movie);
 		scrollTo({ top: 0, behavior: 'smooth' });
 	}
-
-	$: console.log($moviesState.selected);
-	$: console.log(search);
 </script>
 
 <svelte:head>
@@ -46,17 +31,7 @@
 				<p>{$moviesState.selected.show.name}</p>
 			</div>
 		{/if}
-		<!-- <label for="page-size" class="text-skin-base"> Page items: </label>
-		<select
-			name="page-size"
-			class="dark:text-black"
-			on:change={(event) => (pageSize = Number(event.currentTarget.value))}
-		>
-			<option value="1"> 1</option>
-			<option value="5" selected> 5</option>
-			<option value="10">10</option>
-			<option value="100">100 </option>
-		</select> -->
+
 		<div class="square" />
 		<button class="btn p-111">Click me</button>
 	</div>
@@ -97,7 +72,7 @@
 										Score: {movie.score.toFixed(1)}
 									</p>
 								</div>
-								<div class="hover:cursor-pointer" role="img" aria-label="bookmark" on:click={() => selectMovieHandler($movies.data[i])}>
+								<div class="hover:cursor-pointer" role="img" aria-label="bookmark" on:click={() => selectMovieHandler(Array($movies.data).at[i])}>
 									<svg
 										class="focus:outline-none"
 										width="28"

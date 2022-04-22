@@ -2,12 +2,12 @@
 	import type { Load } from '@sveltejs/kit';
 
 	export const load: Load = async ({ url: { pathname }, params }) => ({
-	  props: {
-		key: pathname
-	  },
-	})
-  </script>
-  
+		props: {
+			key: pathname
+		}
+	});
+</script>
+
 <script lang="ts">
 	import '$lib/styles.css';
 	import '@fortawesome/fontawesome-free/css/all.css';
@@ -19,21 +19,20 @@
 
 	export let key: string;
 
-	$: console.log({ ssr: key});
-	$: console.log({ spa: $page.url.pathname});
+	$: console.log({ ssr: key });
+	$: console.log({ spa: $page.url.pathname });
 
 	const queryClient = new QueryClient();
 </script>
 
-
 <QueryClientProvider client={queryClient}>
 	<PageTransition refresh={key}>
-		<article class="dark:bg-gray-800">
+		<article class="dark:bg-gray-800 flex flex-col min-h-screen">
 			<section class="bg-gray-100">
 				<Navigation />
 			</section>
 			<aside />
-			<main>
+			<main class="flex-auto">
 				<slot>Empty content</slot>
 			</main>
 			<aside />
