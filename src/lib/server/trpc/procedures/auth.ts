@@ -1,10 +1,8 @@
 import { prisma } from '$lib/prismaClient';
-import { falsyToNull, trim } from '$lib/server/trpc/zodTransformers';
+import { trim } from '$lib/server/trpc/zodTransformers';
 import * as trpc from '@trpc/server';
 import argon2 from 'argon2';
 import jsonwebtoken from 'jsonwebtoken';
-import { TRPCError } from '@trpc/server';
-import Decimal from 'decimal.js';
 import { z } from 'zod';
 import type { createContext, UserInfo } from '..';
 

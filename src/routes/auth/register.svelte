@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import * as yup from 'yup';
 	import { createForm } from 'svelte-forms-lib';
+	import * as yup from 'yup';
 
 	const { form, errors, state, handleChange, handleSubmit } = createForm({
 		initialValues: {
